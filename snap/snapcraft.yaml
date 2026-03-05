@@ -93,6 +93,12 @@ parts:
       - nvidia-cuda-dev
       - ispc
       - execstack
+      - libwayland-dev # Needed for GLFW
+      - libxkbcommon-dev # Needed for GLFW
+      - libxrandr-dev # Needed for GLFW
+      - libxinerama-dev # Needed for GLFW
+      - libxcursor-dev # Needed for GLFW
+      - libxi-dev # Needed for GLFW
     stage-packages:
       - libaec0
       - libaom3
@@ -193,6 +199,7 @@ parts:
       - libopencv-imgproc406t64
       - libopencv-videoio406t64
       - libopenexr-3-1-30
+      - libegl1
       - libopengl0
       - libopenjp2-7
       - libopenmpt0t64
@@ -313,6 +320,8 @@ parts:
       - opt
       - usr/lib
       - usr/share/X11
+      - usr/share/glvnd
+      - etc/glvnd
       - -opt/MoonRay/build-deps
       - -opt/MoonRay/installs/include
       - -opt/MoonRay/installs/openmoonray/include
@@ -323,6 +332,7 @@ apps:
   moonray:
     command: opt/MoonRay/installs/openmoonray/bin/moonray -dso_path $SNAP/opt/MoonRay/installs/openmoonray/rdl2dso -auto_affinity off
     environment:
+      PATH: $SNAP/usr/bin:$SNAP/bin:/usr/bin:/bin
       LD_LIBRARY_PATH: $SNAP/opt/MoonRay/installs/openmoonray/lib:$SNAP/opt/MoonRay/installs/lib:$SNAP/usr/lib:$SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu/lapack:$SNAP/usr/lib/x86_64-linux-gnu/blas:$SNAP/opt/MoonRay/installs/openmoonray/rdl2dso
     plugs:
       - home
@@ -336,6 +346,21 @@ apps:
     command: opt/MoonRay/installs/openmoonray/bin/moonray_gui -dso_path $SNAP/opt/MoonRay/installs/openmoonray/rdl2dso -auto_affinity off
     command-chain: [ desktop-launch ]
     environment:
+      PATH: $SNAP/usr/bin:$SNAP/bin:/usr/bin:/bin
+      LD_LIBRARY_PATH: $SNAP/opt/MoonRay/installs/openmoonray/lib:$SNAP/opt/MoonRay/installs/lib:$SNAP/usr/lib:$SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu/lapack:$SNAP/usr/lib/x86_64-linux-gnu/blas:$SNAP/opt/MoonRay/installs/openmoonray/rdl2dso
+    plugs:
+      - home
+      - network
+      - desktop
+      - x11
+      - wayland
+      - hardware-observe
+      - opengl
+  gui-v2:
+    command: opt/MoonRay/installs/openmoonray/bin/moonray_gui_v2 -dso_path $SNAP/opt/MoonRay/installs/openmoonray/rdl2dso -auto_affinity off
+    command-chain: [ desktop-launch ]
+    environment:
+      PATH: $SNAP/usr/bin:$SNAP/bin:/usr/bin:/bin
       LD_LIBRARY_PATH: $SNAP/opt/MoonRay/installs/openmoonray/lib:$SNAP/opt/MoonRay/installs/lib:$SNAP/usr/lib:$SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu/lapack:$SNAP/usr/lib/x86_64-linux-gnu/blas:$SNAP/opt/MoonRay/installs/openmoonray/rdl2dso
     plugs:
       - home
@@ -349,6 +374,7 @@ apps:
     command: opt/MoonRay/installs/openmoonray/bin/hd_render
     command-chain: [ desktop-launch ]
     environment:
+      PATH: $SNAP/usr/bin:$SNAP/bin:/usr/bin:/bin
       LD_LIBRARY_PATH: $SNAP/opt/MoonRay/installs/openmoonray/lib:$SNAP/opt/MoonRay/installs/lib:$SNAP/usr/lib:$SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu/lapack:$SNAP/usr/lib/x86_64-linux-gnu/blas:$SNAP/opt/MoonRay/installs/openmoonray/rdl2dso
       PYTHONPATH: $SNAP/opt/MoonRay/installs/lib/python:$SNAP/opt/MoonRay/installs/lib/python3.12/site-packages
       PXR_PLUGINPATH_NAME: $SNAP/opt/MoonRay/installs/lib/usd:$SNAP/opt/MoonRay/installs/openmoonray/plugin/pxr/hd_moonray:$SNAP/opt/MoonRay/installs/openmoonray/plugin/pxr:$SNAP/opt/MoonRay/installs/plugin/usd
@@ -366,6 +392,7 @@ apps:
     command: opt/MoonRay/installs/openmoonray/bin/hd_usd2rdl
     command-chain: [ desktop-launch ]
     environment:
+      PATH: $SNAP/usr/bin:$SNAP/bin:/usr/bin:/bin
       LD_LIBRARY_PATH: $SNAP/opt/MoonRay/installs/openmoonray/lib:$SNAP/opt/MoonRay/installs/lib:$SNAP/usr/lib:$SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu/lapack:$SNAP/usr/lib/x86_64-linux-gnu/blas:$SNAP/opt/MoonRay/installs/openmoonray/rdl2dso
       PYTHONPATH: $SNAP/opt/MoonRay/installs/lib/python:$SNAP/opt/MoonRay/installs/lib/python3.12/site-packages
       PXR_PLUGINPATH_NAME: $SNAP/opt/MoonRay/installs/lib/usd:$SNAP/opt/MoonRay/installs/openmoonray/plugin/pxr/hd_moonray:$SNAP/opt/MoonRay/installs/openmoonray/plugin/pxr:$SNAP/opt/MoonRay/installs/plugin/usd

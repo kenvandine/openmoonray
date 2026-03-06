@@ -346,6 +346,7 @@ apps:
       - wayland
       - hardware-observe
       - opengl
+      - removable-media
   gui:
     command: opt/MoonRay/installs/openmoonray/bin/moonray_gui -dso_path $SNAP/opt/MoonRay/installs/openmoonray/rdl2dso -auto_affinity off
     command-chain: [ desktop-launch ]
@@ -360,6 +361,7 @@ apps:
       - wayland
       - hardware-observe
       - opengl
+      - removable-media
   gui-v2:
     command: opt/MoonRay/installs/openmoonray/bin/moonray_gui_v2 -dso_path $SNAP/opt/MoonRay/installs/openmoonray/rdl2dso -auto_affinity off
     command-chain: [ desktop-launch ]
@@ -374,6 +376,7 @@ apps:
       - wayland
       - hardware-observe
       - opengl
+      - removable-media
   hd-render:
     command: opt/MoonRay/installs/openmoonray/bin/hd_render
     command-chain: [ desktop-launch ]
@@ -393,6 +396,7 @@ apps:
       - wayland
       - hardware-observe
       - opengl
+      - removable-media
   hd-usd2rdl:
     command: opt/MoonRay/installs/openmoonray/bin/hd_usd2rdl
     command-chain: [ desktop-launch ]
@@ -411,3 +415,4 @@ apps:
       - wayland
       - hardware-observe
       - opengl
+      - removable-media

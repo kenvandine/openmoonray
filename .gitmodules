@@ -74,3 +74,6 @@
 	path = rats
 	url = https://github.com/OpenMoonRay/rats
 	branch = main
+[submodule "moonray/materialx_shaders"]
+	path = moonray/materialx_shaders
+	url = ../materialx_shaders

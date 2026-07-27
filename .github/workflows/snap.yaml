@@ -3,8 +3,7 @@ name: Snap
 on:
   push:
     branches: [ubuntu24]
-  release:
-    types: [published]
+    tags: ['*']
   workflow_dispatch:
 
 jobs:
@@ -20,8 +19,25 @@ jobs:
         fetch-tags: true
         submodules: "recursive"
     - uses: snapcore/action-build@v1
+      id: build
     - uses: actions/upload-artifact@v4
       with:
         name: snap
         path: ${{ github.workspace }}/*.snap
         retention-days: 5
+    - name: Publish to edge
+      if: github.event_name == 'push' && github.ref == 'refs/heads/ubuntu24'
+      uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+      with:
+        snap: ${{ steps.build.outputs.snap }}
+        release: edge
+    - name: Publish to candidate
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+      with:
+        snap: ${{ steps.build.outputs.snap }}
+        release: candidate

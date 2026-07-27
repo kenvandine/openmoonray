@@ -123,6 +123,7 @@ parts:
       - libcjson1
       - libcodec2-1.2
       - libcppunit-1.15-0
+      - cuda-cudart-12-6
       - libcurl3t64-gnutls
       - libcurl4t64
       - libdatrie1
@@ -291,6 +292,8 @@ parts:
       - libboost-python1.83.0
       - qtwayland5
       - xkb-data
+    organize:
+      usr/local/cuda-12.6/targets/x86_64-linux/lib/libcudart.so.12*: usr/lib/x86_64-linux-gnu/
     build-environment:
       - CC: /usr/bin/gcc-9
       - CXX: /usr/bin/g++-9
@@ -300,7 +303,7 @@ parts:
       craftctl default
       git config --global url."https://github.com/".insteadOf "git@github.com:"
       git submodule update --init --recursive
-      VERSION=$(grep '^\s*_version' package.py | awk -F "'" '{print $2}')
+      VERSION=$(git describe --tags --always 2>/dev/null || echo "0.0.0")
       echo $VERSION
       craftctl set version=$(echo $VERSION)
     override-build: |

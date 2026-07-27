@@ -294,9 +294,12 @@ parts:
     build-environment:
       - CC: /usr/bin/gcc-9
       - CXX: /usr/bin/g++-9
+      - CUDAHOSTCXX: /usr/bin/g++-9
       - PYTHON_VERSION: 3.12
     override-pull: |
       craftctl default
+      git config --global url."https://github.com/".insteadOf "git@github.com:"
+      git submodule update --init --recursive
       VERSION=$(grep '^\s*_version' package.py | awk -F "'" '{print $2}')
       echo $VERSION
       craftctl set version=$(echo $VERSION)
@@ -307,7 +310,7 @@ parts:
       cmake -DCMAKE_INSTALL_PREFIX=$CRAFT_PART_INSTALL $CRAFT_PART_SRC/building/Ubuntu24/
       cmake --build . -- -j $(nproc)
       cd $CRAFT_PART_SRC
-      cmake --preset ubuntu24-release -DMOONRAY_USE_OPTIX=NO -DMOONRAY_BUILD_TESTING=NO
+      cmake --preset ubuntu24-release -DMOONRAY_USE_OPTIX=YES -DMOONRAY_BUILD_TESTING=NO -DCMAKE_EXE_LINKER_FLAGS="-Wl,--allow-shlib-undefined"
       cmake --build --preset ubuntu24-release -- -j $(nproc)
       cp -rp $CRAFT_PART_SRC/../../installs/* /opt/MoonRay/installs/
       mkdir -p /opt/MoonRay/installs/lib/python/pxr/MoonrayShaderParser

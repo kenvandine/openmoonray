@@ -76,4 +76,4 @@
 	branch = main
 [submodule "moonray/materialx_shaders"]
 	path = moonray/materialx_shaders
-	url = ../materialx_shaders
+	url = https://github.com/OpenMoonRay/materialx_shaders.git

@@ -37,8 +37,7 @@ Note: If building for Houdini, you'll potentially need to make the following cha
 ---
 ### Step 3. Install some of the dependencies via script/package manager
 ```bash
-sudo source openmoonray/building/Ubuntu24/install_packages.sh
-sudo apt install nvidia-cuda-toolkit
+source openmoonray/building/Ubuntu24/install_packages.sh
 ```
 You can add arguments `--nocuda` and `--noqt` to skip GPU and GUI support respectively.
 If you are building with GPU support, copy the Optix headers that you downloaded and extracted into */usr/local*

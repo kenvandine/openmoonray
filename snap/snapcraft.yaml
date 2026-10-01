@@ -4,12 +4,19 @@ adopt-info: openmoonray
 title: MoonRay
 summary: MoonRay is DreamWorks’ open-source production path tracer
 description: |
-  MoonRay is DreamWorks’ open-source, award-winning, state-of-the-art 
-  production path tracer.
+  MoonRay™ is a project hosted under Academy Software Foundation™ of the Linux
+  Foundation®, originally developed at DreamWorks. This multi-award-winning,
+  state-of-the-art production MCRT renderer has been used on feature films
+  such as How to Train Your Dragon: The Hidden World, The Bad Guys, Puss In
+  Boots: The Last Wish, Kung Fu Panda 4, The Wild Robot, The Bad Guys 2, and.
+  MoonRay is in continuous, active development and includes an extensive
+  library of production-tested, physically based materials, a USD Hydra render
+  delegate, multi-machine and cloud rendering via the Arras distributed
+  computation framework.  This software is provided "as-is" by the MoonRay project.
 license: Apache-2.0
-source-code: https://github.com/dreamworksanimation/openmoonray
-contact: https://github.com/dreamworksanimation/openmoonray/issues
-issues: https://github.com/dreamworksanimation/openmoonray/issues
+source-code: https://github.com/OpenMoonRay/openmoonray
+contact: https://github.com/OpenMoonRay/openmoonray/issues
+issues: https://github.com/OpenMoonRay/openmoonray/issues
 website: https://openmoonray.org/
 
 grade: stable
